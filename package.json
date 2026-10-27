@@ -1,0 +1,41 @@
+{
+  "name": "openchamber-file-browser",
+  "version": "0.1.0",
+  "description": "OpenChamber panel that browses the local filesystem through the host file APIs.",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@openchamber/sdk": "1.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.2",
+    "typescript": "7.0.2"
+  },
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "build:panel": "bunx openchamber-guest-bundle panel/main.ts panel/main.js",
+    "check": "bun test && bun run typecheck && bun run build:panel"
+  },
+  "openchamber": {
+    "apiVersion": 1,
+    "engines": {
+      "openchamber": ">=1.24.0"
+    },
+    "contributes": {
+      "panel": {
+        "id": "openchamber-file-browser",
+        "name": "File Browser",
+        "icon": "folder",
+        "entry": "panel/index.html"
+      },
+      "page": true,
+      "capabilities": [
+        "files"
+      ],
+      "filesystem": [
+        "~/.**"
+      ]
+    }
+  }
+}
